@@ -50,77 +50,78 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView cardView;
+        TextView textView;
 
         @SuppressLint("ClickableViewAccessibility")
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_view);
-            cardView = itemView.findViewById(R.id.textView);
+            textView = itemView.findViewById(R.id.textView);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     listener.onClick(view);
                 }
             });
-            imageView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    float x = motionEvent.getX();
-                    float y = motionEvent.getY();
-
-                    switch (motionEvent.getAction()) {
-                        case MotionEvent.ACTION_DOWN: // нажатие
-                            if (x >= imageView.getWidth() / 3 * 2) {  // нажатие на правую часть view
-                                imageView.animate().withLayer()
-                                        .rotationY(12)
-                                        .setDuration(300).start();
-                                cardView.animate().withLayer()
-                                        .rotationY(12)
-                                        .setDuration(300).start();
-                            }
-                            if (x <= imageView.getWidth() / 3) {  // нажатие на левую часть view
-                                imageView.animate().withLayer()
-                                        .rotationY(-12)
-                                        .setDuration(300).start();
-                                cardView.animate().withLayer()
-                                        .rotationY(-12)
-                                        .setDuration(300).start();
-                            }
-                            if (y <= imageView.getHeight() / 3) {  // нажатие на верхнюю часть view
-                                imageView.animate().withLayer()
-                                        .rotationX(12)
-                                        .setDuration(300).start();
-                                cardView.animate().withLayer()
-                                        .rotationX(12)
-                                        .setDuration(300).start();
-                            }
-                            if (y >= imageView.getHeight() / 3 * 2) {  // нажатие на нижнюю часть view
-                                imageView.animate().withLayer()
-                                        .rotationX(-12)
-                                        .setDuration(300).start();
-                                cardView.animate().withLayer()
-                                        .rotationX(-12)
-                                        .setDuration(300).start();
-                            }
-                            break;
-                        case MotionEvent.ACTION_MOVE: // движение
-                            break;
-                        case MotionEvent.ACTION_UP: // отпускание
-                        case MotionEvent.ACTION_CANCEL:
-                            imageView.animate().withLayer()  // возвращаем к исходному положению , когда пользователь отпускает view
-                                    .rotationY(0)
-                                    .rotationX(0)
-                                    .setDuration(1200).start();
-                            cardView.animate().withLayer()
-                                    .rotationY(0)
-                                    .rotationX(0)
-                                    .setDuration(1200).start();
-                            break;
-                    }
-                    return false;
-                }
-            });
+            Animations.itemAnimate(imageView,textView,10,500);
+//            imageView.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View view, MotionEvent motionEvent) {
+//                    float x = motionEvent.getX();
+//                    float y = motionEvent.getY();
+//
+//                    switch (motionEvent.getAction()) {
+//                        case MotionEvent.ACTION_DOWN: // нажатие
+//                            if (x >= imageView.getWidth() / 3 * 2) {  // нажатие на правую часть view
+//                                imageView.animate().withLayer()
+//                                        .rotationY(12)
+//                                        .setDuration(300).start();
+//                                cardView.animate().withLayer()
+//                                        .rotationY(12)
+//                                        .setDuration(300).start();
+//                            }
+//                            if (x <= imageView.getWidth() / 3) {  // нажатие на левую часть view
+//                                imageView.animate().withLayer()
+//                                        .rotationY(-12)
+//                                        .setDuration(300).start();
+//                                cardView.animate().withLayer()
+//                                        .rotationY(-12)
+//                                        .setDuration(300).start();
+//                            }
+//                            if (y <= imageView.getHeight() / 3) {  // нажатие на верхнюю часть view
+//                                imageView.animate().withLayer()
+//                                        .rotationX(12)
+//                                        .setDuration(300).start();
+//                                cardView.animate().withLayer()
+//                                        .rotationX(12)
+//                                        .setDuration(300).start();
+//                            }
+//                            if (y >= imageView.getHeight() / 3 * 2) {  // нажатие на нижнюю часть view
+//                                imageView.animate().withLayer()
+//                                        .rotationX(-12)
+//                                        .setDuration(300).start();
+//                                cardView.animate().withLayer()
+//                                        .rotationX(-12)
+//                                        .setDuration(300).start();
+//                            }
+//                            break;
+//                        case MotionEvent.ACTION_MOVE: // движение
+//                            break;
+//                        case MotionEvent.ACTION_UP: // отпускание
+//                        case MotionEvent.ACTION_CANCEL:
+//                            imageView.animate().withLayer()  // возвращаем к исходному положению , когда пользователь отпускает view
+//                                    .rotationY(0)
+//                                    .rotationX(0)
+//                                    .setDuration(1200).start();
+//                            cardView.animate().withLayer()
+//                                    .rotationY(0)
+//                                    .rotationX(0)
+//                                    .setDuration(1200).start();
+//                            break;
+//                    }
+//                    return false;
+//                }
+//            });
         }
 
     }
